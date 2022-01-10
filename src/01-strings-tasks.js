@@ -262,26 +262,13 @@ function getRectangleString(width, height) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-// function determineCase(symbol) {
-//   const symbolIndex = symbol.charCodeAt(0);
-//   return symbolIndex > 64 && symbolIndex < 91 ? true : symbolIndex > 90 && symbolIndex < 123 ? true : false;
-// }
 
-function calculateSymbolIndex(start, end, )
-function encodeToRot13(/* str */) {
-  return str.replace(/[a-zA-Z]/g, (letter) => {
-    const LETTERS_COUNT = 26;
-    const LOWER_CASE_OFFSET = 'a'.charCodeAt(0);
-    return String.fromCharCode(
-      letter <= 'Z'
-        ? LOWER_CASE_OFFSET
-        : LOWER_CASE_OFFSET + LETTERS_COUNT >=
-          (letter = letter.charCodeAt(0) + 13)
-        ? letter
-        : letter - LETTERS_COUNT
-    );
-  });
+function encodeToRot13(str) {
+  const a = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const b = 'nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM';
+  return str.replace(/[a-z]/gi, (c) => b[a.indexOf(c)]);
 }
+
 
 /**
  * Returns true if the value is string; otherwise false.

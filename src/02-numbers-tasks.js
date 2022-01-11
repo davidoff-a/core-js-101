@@ -122,14 +122,12 @@ function getAngleBetweenVectors(x1, y1, x2, y2) {
   const scalar = x1 * x2 + y1 * y2;
   const a = Math.sqrt(x1 ** 2 + x2 ** 2);
   const b = Math.sqrt(y1 ** 2 + y2 ** 2);
-  const angles = {
-    1: 0,
-    0: Math.PI / 2,
-    '-1': Math.PI,
-  };
-  return angles[scalar / (a * b)];
+  // console.log(scalar, a, b);
+  // console.log(scalar / (a * b));
+  return a * b ? Math.acos(scalar / (a * b)) : Math.acos(0);
 }
-getAngleBetweenVectors(0, 1, 0, -1);
+// console.log(getAngleBetweenVectors(0,1,0,-1));
+
 /**
  * Returns a last digit of a integer number.
  *

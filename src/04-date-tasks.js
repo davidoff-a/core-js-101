@@ -121,7 +121,7 @@ function angleBetweenClockHands(date) {
   const angle = handsAngle > 360 ? handsAngle - 360 : handsAngle;
   return toRad(angle > 180 ? 360 - angle : angle);
 }
-console.log(angleBetweenClockHands(Date.UTC(2016, 3, 5, 9, 0)));
+// console.log(angleBetweenClockHands(Date.UTC(2016, 3, 5, 9, 0)));
 
 module.exports = {
   parseDataFromRfc2822,

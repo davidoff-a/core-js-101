@@ -620,7 +620,10 @@ function getElementByIndexes(/* arr, indexes */) {
  *
  */
 function swapHeadAndTail(arr) {
-  const headLength = Math.floor(arr.length / 2);
+  let headLength;
+  if (arr.length === 0) { return []; }
+  if (arr.length === 1) { return arr; }
+  if (arr.length > 1) { headLength = Math.floor(arr.length / 2); }
   const head = [...arr].splice(0, headLength);
   const tail = [...arr].splice(-headLength);
   const center = [...arr].splice(Math.floor(arr.length / 2), 1);

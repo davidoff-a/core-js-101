@@ -95,7 +95,7 @@ function getSumBetweenNumbers(n1, n2) {
  *   10,10,10 =>  true
  */
 function isTriangle(a, b, c) {
-  return ((c - (a + b))) < 0 && ((b - (a + c)) < 0) && ((a - (c + b)) < 0);
+  return c - (a + b) < 0 && b - (a + c) < 0 && a - (c + b) < 0;
 }
 /**
  * Returns true, if two specified axis-aligned rectangles overlap, otherwise false.
@@ -132,11 +132,14 @@ function isTriangle(a, b, c) {
 // function checkCoords(paramTemplate, paramCompare1, paramCompare2) {
 //   return (paramTemplate - paramCompare1 - paramCompare2) > 0;
 // }
-function doRectanglesOverlap({
-  width: w1, height: h1, top: t1, left: l1,
-}, {
-  width: w2, height: h2, top: t2, left: l2,
-}) {
+function doRectanglesOverlap(
+  {
+    width: w1, height: h1, top: t1, left: l1,
+  },
+  {
+    width: w2, height: h2, top: t2, left: l2,
+  },
+) {
   if (Math.abs(t1 - t2) > Math.max(h1, h2)) return false;
   if (Math.abs(l1 - l2) > Math.max(w1, w2)) return false;
   return true;
@@ -189,9 +192,9 @@ function findFirstSingleChar(str) {
   const letters = {};
   for (let i = 0; i < str.length; i += 1) {
     if (!letters[str[i]]) {
-      (letters[str[i]] = 1);
+      letters[str[i]] = 1;
     } else {
-      (letters[str[i]] += 1);
+      letters[str[i]] += 1;
     }
   }
   return Object.entries(letters).filter((entry) => entry[1] === 1)[0]
@@ -221,8 +224,10 @@ function findFirstSingleChar(str) {
  *   5, 3, true, true   => '[3, 5]'
  *
  */
-function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
-  throw new Error('Not implemented');
+function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
+  return `${isStartIncluded ? '[' : '('}${Math.min(a, b)}, ${Math.max(a, b)}${
+    isEndIncluded ? ']' : ')'
+  }`;
 }
 
 /**

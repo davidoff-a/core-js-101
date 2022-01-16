@@ -185,10 +185,20 @@ function isInsideCircle({ center: c, radius: r }, { x: x2, y: y2 }) {
  *   'abracadabra'  => 'c'
  *   'entente' => null
  */
-function findFirstSingleChar(/* str */) {
-  throw new Error('Not implemented');
+function findFirstSingleChar(str) {
+  const letters = {};
+  for (let i = 0; i < str.length; i += 1) {
+    if (!letters[str[i]]) {
+      (letters[str[i]] = 1);
+    } else {
+      (letters[str[i]] += 1);
+    }
+  }
+  return Object.entries(letters).filter((entry) => entry[1] === 1)[0]
+    ? Object.entries(letters).filter((entry) => entry[1] === 1)[0][0]
+    : null;
 }
-
+// console.log(findFirstSingleChar('abracadabra'));
 /**
  * Returns the string representation of math interval,
  * specified by two points and include / exclude flags.

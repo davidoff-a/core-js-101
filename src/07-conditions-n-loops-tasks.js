@@ -129,8 +129,17 @@ function isTriangle(a, b, c) {
  *   { top:20, left:20, width: 20, height: 20 }    =>  false
  *
  */
-function doRectanglesOverlap(/* rect1, rect2 */) {
-  throw new Error('Not implemented');
+// function checkCoords(paramTemplate, paramCompare1, paramCompare2) {
+//   return (paramTemplate - paramCompare1 - paramCompare2) > 0;
+// }
+function doRectanglesOverlap({
+  width: w1, height: h1, top: t1, left: l1,
+}, {
+  width: w2, height: h2, top: t2, left: l2,
+}) {
+  if (Math.abs(t1 - t2) > Math.max(h1, h2)) return false;
+  if (Math.abs(l1 - l2) > Math.max(w1, w2)) return false;
+  return true;
 }
 
 /**

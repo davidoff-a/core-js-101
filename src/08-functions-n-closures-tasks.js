@@ -24,6 +24,7 @@
  *
  */
 function getComposition(/* f, g */) {
+  // return f(g(param));
   throw new Error('Not implemented');
 }
 
@@ -44,10 +45,11 @@ function getComposition(/* f, g */) {
  *   power05(16) => 4
  *
  */
-function getPowerFunction(/* exponent */) {
-  throw new Error('Not implemented');
+function getPowerFunction(exponent) {
+  return function pow(power) {
+    return power ** exponent;
+  };
 }
-
 
 /**
  * Returns the polynom function of one argument based on specified coefficients.

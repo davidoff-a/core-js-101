@@ -477,12 +477,12 @@ function fillArray() {
   };
 }
 
-
 function getIdentityMatrix(n) {
   const index = fillArray();
-  return Array(n).fill(0).map(() => (index(n)));
+  return Array(n)
+    .fill(0)
+    .map(() => index(n));
 }
-
 
 /**
  * Creates an array of integers from the specified start to end (inclusive)
@@ -508,7 +508,9 @@ function getIntervalArray(start, end) {
   // return arr;
   // const arrLength = end - start;
   const arrLength = end - start + 1;
-  return Array(arrLength).fill(start).map((item, index) => item + index);
+  return Array(arrLength)
+    .fill(start)
+    .map((item, index) => item + index);
 }
 
 /**
@@ -558,14 +560,21 @@ function distinct(arr) {
  */
 function group(array, keySelector, valueSelector) {
   const map = new Map();
-  const count = array.length;
-
-  for (let key, i = 0; i < count; i += 1) {
-    key = keySelector(array[i]);
-    if (map.has(key)) map.get(key).push(valueSelector(array[i]));
-    else map.set(key, [valueSelector(array[i])]);
-  }
-  return map;
+  return array.reduce((prevData, curItem) => {
+    const key = keySelector(curItem);
+    return map.has(key)
+      ? map.get(key).push(valueSelector(curItem))
+      : map.set(key, [valueSelector(curItem)]);
+  }, map);
+  // const map = new Map();
+  // const count = array.length;
+  //
+  // for (let key, i = 0; i < count; i += 1) {
+  //   key = keySelector(array[i]);
+  //   if (map.has(key)) map.get(key).push(valueSelector(array[i]));
+  //   else map.set(key, [valueSelector(array[i])]);
+  // }
+  // return map;
 }
 
 /**
@@ -581,12 +590,12 @@ function group(array, keySelector, valueSelector) {
  *   [[1, 2], [3, 4], [5, 6]], (x) => x     =>   [ 1, 2, 3, 4, 5, 6 ]
  *   ['one','two','three'], x=>x.split('')  =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
-function selectMany(/* arr, childrenSelector */) {
-  throw new Error('Not implemented');
+function selectMany(arr, childrenSelector) {
+  return arr.map((item) => childrenSelector(item)).flat();
 }
-
 /**
  * Returns an element from the multidimensional array by the specified indexes.
+ *
  *
  * @param {array} arr
  * @param {array} indexes
@@ -597,10 +606,12 @@ function selectMany(/* arr, childrenSelector */) {
  *   ['one','two','three'], [2]       => 'three'  (arr[2])
  *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
  */
-function getElementByIndexes(/* arr, indexes */) {
-  throw new Error('Not implemented');
+function getElementByIndexes(arr, indexes) {
+  return indexes.reduce(
+    (previousData, curIndex) => previousData[curIndex],
+    arr,
+  );
 }
-
 /**
  * Swaps the head and tail of the specified array:
  * the head (first half) of array move to the end, the tail (last half) move to the start.
@@ -621,9 +632,15 @@ function getElementByIndexes(/* arr, indexes */) {
  */
 function swapHeadAndTail(arr) {
   let headLength;
-  if (arr.length === 0) { return []; }
-  if (arr.length === 1) { return arr; }
-  if (arr.length > 1) { headLength = Math.floor(arr.length / 2); }
+  if (arr.length === 0) {
+    return [];
+  }
+  if (arr.length === 1) {
+    return arr;
+  }
+  if (arr.length > 1) {
+    headLength = Math.floor(arr.length / 2);
+  }
   const head = [...arr].splice(0, headLength);
   const tail = [...arr].splice(-headLength);
   const center = [...arr].splice(Math.floor(arr.length / 2), 1);

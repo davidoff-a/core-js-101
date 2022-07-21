@@ -145,13 +145,13 @@ const cssSelectorBuilder = {
     return this;
   },
 
-  combine(selector1, combinator, selector2) {
-    const sel1 = selector1.stringify();
-    const sel2 = selector2.stringify();
-    this.result = `${sel1}${combinator}`;
-    console.log(this.result);
-    return this;
-  },
+  // combine(selector1, combinator) {
+  //   const sel1 = selector1.stringify();
+  //   // const sel2 = selector2.stringify();
+  //   this.result = `${sel1}${combinator}`;
+  //   // console.log(this.result);
+  //   return this;
+  // },
 
   stringify() {
     const res = this.result;
@@ -160,12 +160,12 @@ const cssSelectorBuilder = {
   },
 };
 
-const builder = cssSelectorBuilder;
-console.log(builder.combine(
-  builder.element('p').pseudoClass('focus'),
-  '>',
-  builder.element('a').attr('href$=".png"'),
-).stringify());
+// const builder = cssSelectorBuilder;
+// console.log(builder.combine(
+//   builder.element('p').pseudoClass('focus'),
+//   '>',
+//   builder.element('a').attr('href$=".png"'),
+// ).stringify());
 
 module.exports = {
   Rectangle,

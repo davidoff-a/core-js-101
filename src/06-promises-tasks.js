@@ -28,9 +28,11 @@
  *      .catch((error) => console.log(error.message)) // 'Error: Wrong parameter is passed!
  *                                                    //  Ask her again.';
  */
-function willYouMarryMe(/* isPositiveAnswer */) {
-  throw new Error('Not implemented');
-}
+// function willYouMarryMe(isPositiveAnswer) {
+//   // return new Promise((resolve, reject)=>{
+//   //   if (isPositiveAnswer) resolve
+//   // })
+// }
 
 
 /**
@@ -97,7 +99,7 @@ function chainPromises(/* array, action */) {
 }
 
 module.exports = {
-  willYouMarryMe,
+  // willYouMarryMe,
   processAllPromises,
   getFastestPromise,
   chainPromises,

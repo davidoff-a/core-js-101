@@ -145,13 +145,10 @@ const cssSelectorBuilder = {
     return this;
   },
 
-  // combine(selector1, combinator) {
-  //   const sel1 = selector1.stringify();
-  //   // const sel2 = selector2.stringify();
-  //   this.result = `${sel1}${combinator}`;
-  //   // console.log(this.result);
-  //   return this;
-  // },
+  combine(selector1, combinator, selector2) {
+    this.result = `${selector1.stringify()} ${this.element(combinator).stringify()} ${selector2.stringify()}`;
+    return this;
+  },
 
   stringify() {
     const res = this.result;

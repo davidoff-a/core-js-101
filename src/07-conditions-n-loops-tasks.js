@@ -356,22 +356,30 @@ function getDigitalRoot(num) {
 function isBracketsBalanced(str) {
   const stackBrackets = [];
   const openBrackets = ['(', '[', '{', '<'];
+  const closeBrackets = [')', ']', '}', '>'];
+
   if (!str.length) {
     return true;
   }
   if (str.length % 2) {
     return false;
   }
-  str.split('').forEach((bracket) => {
-    if (openBrackets.includes(bracket)) {
-      stackBrackets.push(bracket);
-    } else if (stackBrackets[stackBrackets.length - 1] === bracket) {
-      stackBrackets.pop();
+  const bracketsArr = str.split('');
+  for (let i = 0; i < bracketsArr.length; i += 1) {
+    const brIndex = openBrackets.indexOf(bracketsArr[i]);
+    if (brIndex >= 0) {
+      stackBrackets.push(bracketsArr[i]);
+    } else {
+      const lastOpenBracket = stackBrackets[stackBrackets.length - 1];
+      const lastOpenBracketIndex = openBrackets.indexOf(lastOpenBracket);
+      if (bracketsArr[i] === closeBrackets[lastOpenBracketIndex]) {
+        stackBrackets.pop();
+      }
     }
-  });
-  return stackBrackets.length > 0;
+  }
+  return stackBrackets.length === 0;
 }
-
+// console.log(isBracketsBalanced('{}]'));
 /**
  * Returns the string with n-ary (binary, ternary, etc, where n <= 10)
  * representation of specified number.
@@ -408,10 +416,11 @@ function toNaryString(/* num, n */) {
  *   ['/web/assets/style.css', '/.bin/mocha',  '/read.me'] => '/'
  *   ['/web/favicon.ico', '/web-scripts/dump', '/verbalizer/logs'] => '/'
  */
-function getCommonDirectoryPath(/* pathes */) {
-  throw new Error('Not implemented');
+function getCommonDirectoryPath(pathes) {
+  const searchStr = pathes.sort().reverse()[0];
+  return searchStr;// console.log(searchStr)
 }
-
+getCommonDirectoryPath(['/web/favicon.ico', '/web-scripts/dump', '/verbalizer/logs']);
 /**
  * Returns the product of two specified matrixes.
  * See details: https://en.wikipedia.org/wiki/Matrix_multiplication

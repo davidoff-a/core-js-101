@@ -133,8 +133,12 @@ function isTriangle(a, b, c) {
 //   return (paramTemplate - paramCompare1 - paramCompare2) > 0;
 // }
 function doRectanglesOverlap(
-  { width: w1, height: h1, top: t1, left: l1 },
-  { width: w2, height: h2, top: t2, left: l2 }
+  {
+    width: w1, height: h1, top: t1, left: l1,
+  },
+  {
+    width: w2, height: h2, top: t2, left: l2,
+  },
 ) {
   if (Math.abs(t1 - t2) > Math.max(h1, h2)) return false;
   if (Math.abs(l1 - l2) > Math.max(w1, w2)) return false;
@@ -406,9 +410,7 @@ function getCommonDirectoryPath(pathes) {
   let searchIndex = -1;
 
   for (let i = searchStr.length; i >= 0; i -= 1) {
-    const finder = pathes.every((path) =>
-      path.includes(searchStr.slice(0, i + 1))
-    );
+    const finder = pathes.every((path) => path.includes(searchStr.slice(0, i + 1)));
     if (finder && searchStr[i] === '/') {
       searchIndex = i;
       break;

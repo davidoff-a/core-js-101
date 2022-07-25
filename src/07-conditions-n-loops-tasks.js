@@ -290,12 +290,12 @@ function reverseInteger(num) {
  *   5436468789016589 => false
  *   4916123456789012 => false
  */
-function isCreditCardNumber(ccn) {
-  const digits = ccn.length - 2;
+function isCreditCardNumber(cnn) {
+  const digits = cnn.length - 2;
   let sum = 0;
   const parity = (digits + 1) % 2;
   for (let i = 0; i <= digits; i += 1) {
-    let digit = Number(ccn[i]);
+    let digit = Number(cnn[i]);
     if (i % 2 === parity) {
       digit *= 2;
     }
@@ -321,17 +321,14 @@ function isCreditCardNumber(ccn) {
  *   10000 ( 1+0+0+0+0 = 1 ) => 1
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
-function getDigitalRoot(num) {
-  const sumDigits = String(num)
+function getDigitalRoot(n) {
+  const sumDigits = String(n)
     .split('')
-    .reduce((previousValue, curSym) => {
-      // eslint-disable-next-line no-param-reassign
-      previousValue += Number(curSym);
-      return previousValue;
-    }, 0);
+    .reduce((previousValue, curSym) => previousValue + Number(curSym), 0);
   return sumDigits > 9 ? getDigitalRoot(sumDigits) : sumDigits;
 }
-
+// eslint-disable-next-line no-param-reassign
+// previousValue += Number(curSym);
 /**
  * Returns true if the specified string has the balanced brackets and false otherwise.
  * Balanced means that is, whether it consists entirely of pairs of opening/closing brackets
@@ -418,9 +415,17 @@ function toNaryString(/* num, n */) {
  */
 function getCommonDirectoryPath(pathes) {
   const searchStr = pathes.sort().reverse()[0];
-  return searchStr;// console.log(searchStr)
+  let searchIndex = -1;
+
+  for (let i = searchStr.length; i >= 0; i -= 1) {
+    const finder = pathes.every((path) => path.includes(searchStr.slice(0, i + 1)));
+    if (finder && searchStr[i] === '/') {
+      searchIndex = i;
+      break;
+    }
+  }
+  return searchIndex >= 0 ? searchStr.slice(0, searchIndex + 1) : '';
 }
-getCommonDirectoryPath(['/web/favicon.ico', '/web-scripts/dump', '/verbalizer/logs']);
 /**
  * Returns the product of two specified matrixes.
  * See details: https://en.wikipedia.org/wiki/Matrix_multiplication
@@ -473,8 +478,12 @@ function getMatrixProduct(/* m1, m2 */) {
  *    [    ,   ,    ]]
  *
  */
-function evaluateTicTacToePosition(/* position */) {
-  throw new Error('Not implemented');
+function evaluateTicTacToePosition(position) {
+  // const symbolCoords = {
+  //   'X':[],
+  //   '0':[],
+  // }
+  return position;
 }
 
 module.exports = {

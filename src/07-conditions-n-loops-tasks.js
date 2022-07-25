@@ -482,11 +482,11 @@ function getMatrixProduct(m1, m2) {
  */
 function evaluateTicTacToePosition(position) {
   const periods = [1, 3, 4];
-  position.forEach((arr) => {
-    arr.forEach((el) => console.log(el));
-  });
+  // position.forEach((arr) => {
+  //   arr.forEach((el) => console.log(el));
+  // });
   const newArr = position.flat().map((item) => (!item ? '-' : item));
-  console.log(newArr);
+  // console.log(newArr);
   const result = newArr.map((item, index) => {
     if (item && item !== '-') {
       const template = item.repeat(3);
@@ -504,9 +504,9 @@ function evaluateTicTacToePosition(position) {
   });
   return result.filter((item) => item !== undefined).join();
 }
-console.log(
-  evaluateTicTacToePosition([['X', 'X', 'X'], ['0', '0'], ['0']]),
-);
+// console.log(
+//   evaluateTicTacToePosition([['X', 'X', 'X'], ['0', '0'], ['0']]),
+// );
 module.exports = {
   getFizzBuzz,
   getFactorial,
